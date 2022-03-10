@@ -30,10 +30,11 @@ namespace WindowsFormsApp1
         private void InitializeComponent()
         {
             this.btnStart = new System.Windows.Forms.Button();
-            this.status = new System.Windows.Forms.ListBox();
-            this.txtChooseFile = new System.Windows.Forms.Button();
+            this.btnChooseFile = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtChooseFile = new System.Windows.Forms.TextBox();
+            this.listStatus = new System.Windows.Forms.RichTextBox();
+            this.txtThongKe = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // btnStart
@@ -47,24 +48,15 @@ namespace WindowsFormsApp1
             this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
-            // status
+            // btnChooseFile
             // 
-            this.status.FormattingEnabled = true;
-            this.status.Location = new System.Drawing.Point(40, 180);
-            this.status.Name = "status";
-            this.status.Size = new System.Drawing.Size(727, 238);
-            this.status.TabIndex = 4;
-            this.status.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.status_DrawItem);
-            // 
-            // txtChooseFile
-            // 
-            this.txtChooseFile.Location = new System.Drawing.Point(319, 75);
-            this.txtChooseFile.Name = "txtChooseFile";
-            this.txtChooseFile.Size = new System.Drawing.Size(75, 23);
-            this.txtChooseFile.TabIndex = 5;
-            this.txtChooseFile.Text = "Chọn file";
-            this.txtChooseFile.UseVisualStyleBackColor = true;
-            this.txtChooseFile.Click += new System.EventHandler(this.button1_Click);
+            this.btnChooseFile.Location = new System.Drawing.Point(375, 76);
+            this.btnChooseFile.Name = "btnChooseFile";
+            this.btnChooseFile.Size = new System.Drawing.Size(75, 23);
+            this.btnChooseFile.TabIndex = 5;
+            this.btnChooseFile.Text = "Chọn file";
+            this.btnChooseFile.UseVisualStyleBackColor = true;
+            this.btnChooseFile.Click += new System.EventHandler(this.button1_Click);
             // 
             // label1
             // 
@@ -76,25 +68,42 @@ namespace WindowsFormsApp1
             this.label1.TabIndex = 6;
             this.label1.Text = "Crawl status";
             // 
-            // textBox1
+            // txtChooseFile
             // 
-            this.textBox1.Location = new System.Drawing.Point(400, 77);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(367, 20);
-            this.textBox1.TabIndex = 7;
+            this.txtChooseFile.Location = new System.Drawing.Point(491, 78);
+            this.txtChooseFile.Name = "txtChooseFile";
+            this.txtChooseFile.Size = new System.Drawing.Size(367, 20);
+            this.txtChooseFile.TabIndex = 7;
+            // 
+            // listStatus
+            // 
+            this.listStatus.Location = new System.Drawing.Point(40, 180);
+            this.listStatus.Name = "listStatus";
+            this.listStatus.Size = new System.Drawing.Size(818, 276);
+            this.listStatus.TabIndex = 9;
+            this.listStatus.Text = "";
+            // 
+            // txtThongKe
+            // 
+            this.txtThongKe.Location = new System.Drawing.Point(40, 462);
+            this.txtThongKe.Name = "txtThongKe";
+            this.txtThongKe.Size = new System.Drawing.Size(818, 33);
+            this.txtThongKe.TabIndex = 10;
+            this.txtThongKe.Text = "";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(899, 516);
+            this.Controls.Add(this.txtThongKe);
+            this.Controls.Add(this.listStatus);
             this.Controls.Add(this.txtChooseFile);
-            this.Controls.Add(this.status);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.btnChooseFile);
             this.Controls.Add(this.btnStart);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Tool Crawl File Image";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -103,10 +112,11 @@ namespace WindowsFormsApp1
         #endregion
 
         private System.Windows.Forms.Button btnStart;
-        private System.Windows.Forms.ListBox status;
-        private System.Windows.Forms.Button txtChooseFile;
+        private System.Windows.Forms.Button btnChooseFile;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtChooseFile;
+        private System.Windows.Forms.RichTextBox listStatus;
+        private System.Windows.Forms.RichTextBox txtThongKe;
     }
 }
 

@@ -22,35 +22,49 @@ namespace WindowsFormsApp1
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            string[] listUrlImage = File.ReadLines(@"E:\Tools Crawl file image\ListLink.txt").ToArray();
+            if (txtChooseFile.Text == "")
+            {
+                return;
+            }
+            listStatus.Text = "";
+            txtThongKe.Text = "";
+            string[] listUrlImage = File.ReadLines(txtChooseFile.Text).ToArray();
             DateTime dt = DateTime.Now;
             Random rd = new Random();
-            var i = 0;
+            var successCount = 0;
+            var failCount = 0;
             var count = listUrlImage.Length;
-            
+            //string result = "";
             using (WebClient webClient = new WebClient())
             {
 
                 try
                 {
-                    foreach (var item in listUrlImage)
+                    //listStatus.View = View.List;
+                    for (int j = 0; j < listUrlImage.Length; j++)
                     {
-                        i++;
                         try
                         {
-                            var sleepRandom = rd.Next(1, 10)*100;
-                            string fileName = Path.GetFileName(new UriBuilder(item.ToString()).Path);
-                            webClient.DownloadFile(item.ToString(), "images\\" + fileName);
-                            status.Items.Add(i + "/" + count + " - " + item.ToString() + " - download thành công");
+                            var sleepRandom = rd.Next(1, 10) * 100;
+                            string fileName = Path.GetFileName(new UriBuilder(listUrlImage[j].ToString()).Path);
+                            webClient.DownloadFile(listUrlImage[j].ToString(), "images\\" + fileName);
+                            //listStatus.Items.Add(j+1 + "/" + count + " - " + listUrlImage[j].ToString() + " - download thành công");
+                            //listStatus.Items[j].ForeColor = Color.Green;
+                            listStatus.Text += j + 1 + "/" + count + " - " + listUrlImage[j].ToString() + " - download thành công\n";
+                            successCount++;
                             Thread.Sleep(sleepRandom);
                         }
                         catch (Exception ex)
                         {
-                            status.Items.Add(i +"/" + count + " - " + item.ToString() + " - bị lỗi "+ex.Message);
+                            failCount++;
+                            //listStatus.Items.Add(j+1 + "/" + count + " - " + listUrlImage[j].ToString() + " - bị lỗi " + ex.Message);
+                            //listStatus.Items[j].ForeColor = Color.Red;
+                            listStatus.Text += j + 1 + "/" + count + " - " + listUrlImage[j].ToString() + " - Lỗi " + ex.Message + "\n";
                             continue;
                         }
-                       
                     }
+                    txtThongKe.Text = "Successed: " + successCount + "\tFailed: " + failCount + "\tTotal: "+count;
+                    //listStatus.Text = result;
 
                 }
                 catch (Exception ex)
@@ -62,25 +76,13 @@ namespace WindowsFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void status_DrawItem(object sender, DrawItemEventArgs e)
-        {
-            //e.DrawBackground();
-            //Graphics g = e.Graphics;
-            //Brush myBrush = Brushes.Black;
-            //Brush myBrush2 = Brushes.Red;
-            //g.FillRectangle(new SolidBrush(Color.Silver), e.Bounds);
-            //e.Graphics.DrawString(status.Items[e.Index].ToString(), e.Font, myBrush, e.Bounds, StringFormat.GenericDefault);
-            //for (int i = 0; i < status.Items.Count; i++)
-            //{
-            //    if (listBox1.Items[i].ToString().Contains(existingStudents[j]))
-            //    {
-            //        e.Graphics.DrawString(listBox1.Items[i].ToString(),
-            //        e.Font, myBrush2, e.Bounds, StringFormat.GenericDefault);
-            //    }
-            //}
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string fileName;
+                fileName = openFileDialog.FileName;
+                txtChooseFile.Text = fileName;
+            }
         }
     }
 }
